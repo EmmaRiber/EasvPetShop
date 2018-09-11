@@ -47,7 +47,7 @@ namespace EasvPetShopApi.Controllers
         [HttpPut("{id}")]
         public ActionResult<Owner> Put(int id, [FromBody] Owner owner)
         {
-            if (id < 1 || id != owner.Id)
+            if (id < 1 || id != owner.OwnerId)
             {
                 return BadRequest("Parameter Id and order Id must be the same");
             }
