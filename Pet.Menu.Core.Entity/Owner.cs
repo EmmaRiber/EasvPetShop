@@ -12,6 +12,6 @@ namespace Pet.Menu.Core.Entity
 
         public string LastName { get; set; }
 
-        public string adress { get; set; }
+        public string Adress { get; set; }
     }
 }
