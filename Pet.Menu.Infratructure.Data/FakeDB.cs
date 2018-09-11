@@ -15,6 +15,7 @@ namespace Pet.Menu.Infratructure.Data
 
         public static void InitData()
         {
+            //FakeDB Pets
             var pet1 = new PetEntity()
             {
                 Id = PetId++,
@@ -86,8 +87,10 @@ namespace Pet.Menu.Infratructure.Data
                 PreviousOwner = "Stine Damsen",
                 Price = 120
             };
+
             Pets = new List<PetEntity> { pet1, pet2, pet3, pet4, pet5, pet6 };
 
+            //FakeDB Owners
             var owner1 = new Owner()
             {
                 OwnerId = OwnerId++,
@@ -95,7 +98,24 @@ namespace Pet.Menu.Infratructure.Data
                 LastName = "Strand",
                 Adress = "Roligvej 3"
             };
-            Owners = new List<Owner> { owner1 };
+
+            var owner2 = new Owner()
+            {
+                OwnerId = OwnerId++,
+                FirstName = "Ulla",
+                LastName = "Badulla",
+                Adress = "BubbiVej 103"
+            };
+
+            var owner3 = new Owner()
+            {
+                OwnerId = OwnerId++,
+                FirstName = "Finn",
+                LastName = "Pind",
+                Adress = "PølseVej 154"
+            };
+
+            Owners = new List<Owner> { owner1, owner2, owner3 };
         }
     }
 }

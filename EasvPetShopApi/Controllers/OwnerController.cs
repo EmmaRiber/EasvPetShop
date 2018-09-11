@@ -24,7 +24,7 @@ namespace EasvPetShopApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Owner>> Get()
         {
-            return Ok();
+            return _ownerService.GetAllOwners();
         }
 
         // GET: api/Owner/5
@@ -33,14 +33,18 @@ namespace EasvPetShopApi.Controllers
         {
             if (id < 1) return BadRequest("Id must be larger than 0");
 
-            return Ok();
+            return _ownerService.FindOwnerById(id);
         }
 
         // POST: api/Owner
         [HttpPost]
         public ActionResult<Owner> Post([FromBody] Owner owner)
         {
-            return Ok();
+            if (string.IsNullOrEmpty(owner.FirstName))
+            {
+                return BadRequest("Name is Required for Creating Owner");
+            }
+            return _ownerService.CreateOwner(owner);
         }
 
         // PUT: api/Owner/5
@@ -51,6 +55,7 @@ namespace EasvPetShopApi.Controllers
             {
                 return BadRequest("Parameter Id and order Id must be the same");
             }
+            _ownerService.UpdateOwner(owner);
             return Ok();
         }
 
@@ -58,6 +63,11 @@ namespace EasvPetShopApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Owner> Delete(int id)
         {
+            var Owner = _ownerService.DeleteOwner(id);
+            if (Owner == null)
+            {
+                return StatusCode(404, "Did not find Owner with Id" + id);
+            }
             return Ok($"Owner with Id: {id} is deleted");
         }
     }

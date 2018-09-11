@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Pet.Menu.Core.ApplicationService.Services
 {
-    class OwnerService: IOwnerService
+    public class OwnerService: IOwnerService
     {
         private IOwnerRepository _repository;
 

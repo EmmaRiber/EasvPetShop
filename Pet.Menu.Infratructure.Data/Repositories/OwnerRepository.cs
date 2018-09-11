@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Pet.Menu.Infratructure.Data.Repositories
 {
-    class OwnerRepository : IOwnerRepository
+    public class OwnerRepository : IOwnerRepository
     {
         public IEnumerable<Owner> ReadAll()
         {
