@@ -9,8 +9,9 @@ namespace Pet.Menu.Infratructure.Data
     {
         public static int PetId = 1;
         public static IEnumerable<PetEntity> Pets;
-        
-        //Hej
+
+        public static int OwnerId = 1;
+        public static IEnumerable<Owner> Owners;
 
         public static void InitData()
         {
@@ -86,6 +87,15 @@ namespace Pet.Menu.Infratructure.Data
                 Price = 120
             };
             Pets = new List<PetEntity> { pet1, pet2, pet3, pet4, pet5, pet6 };
+
+            var owner1 = new Owner()
+            {
+                OwnerId = OwnerId++,
+                FirstName = "Sune",
+                LastName = "Strand",
+                Adress = "Roligvej 3"
+            };
+            Owners = new List<Owner> { owner1 };
         }
     }
 }

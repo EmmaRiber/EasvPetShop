@@ -6,7 +6,7 @@ namespace Pet.Menu.Core.Entity
 {
     public class Owner
     {
-        public int Id { get; set; }
+        public int OwnerId { get; set; }
 
         public string FirstName { get; set; }
 
