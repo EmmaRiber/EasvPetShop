@@ -9,41 +9,54 @@ namespace Pet.Menu.Core.ApplicationService.Services
 {
     public class OwnerService: IOwnerService
     {
-        private IOwnerRepository _repository;
+        readonly IOwnerRepository _ownerRepo;
+        readonly IPetRepository _petRepo;
 
-        public OwnerService(IOwnerRepository repository)
+        public OwnerService(IOwnerRepository repository, 
+            IPetRepository petRepository)
         {
-            _repository = repository;
+            _ownerRepo = repository;
+            _petRepo = petRepository;
         }
 
-        public Owner New()
+        public Owner New(string first_name, string last_name, string adress, int pets)
         {
-            return new Owner();
+            var owner = new Owner
+            {
+                FirstName = first_name,
+                LastName = last_name,
+                Adress = adress
+            };
+            return owner;
         }
 
         public Owner CreateOwner(Owner owner)
         {
-            return _repository.Create(owner);
+            return _ownerRepo.Create(owner);
         }
 
         public Owner FindOwnerById(int id)
         {
-            return _repository.ReadById(id);
+            return _ownerRepo.ReadById(id);
         }
 
         public List<Owner> GetAllOwners()
         {
-            return _repository.ReadAll().ToList();
+            return _ownerRepo.ReadAll().ToList();
         }
 
         public Owner UpdateOwner(Owner ownerUpdate)
         {
-            return _repository.Update(ownerUpdate);
+            return _ownerRepo.Update(ownerUpdate);
         }
 
         public Owner DeleteOwner(int id)
         {
-            return _repository.Delete(id);
+            if(id < 1)
+            {
+                throw new InvalidOperationException("Id must be bigger than 0");
+            }
+            return _ownerRepo.Delete(id);
         }
     }
 }

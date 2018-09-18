@@ -10,9 +10,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EasvPetShopApi\EasvPetShopApi.csproj" />
     <ProjectReference Include="..\Pet.Menu.Core.Entity\Pet.Menu.Core.Entity.csproj" />
     <ProjectReference Include="..\Pet.Menu.Core\Pet.Menu.Core.csproj" />
     <ProjectReference Include="..\Pet.Menu.Infratructure.Data\Pet.Menu.Infratructure.Data.csproj" />
+    <ProjectReference Include="..\PetShop.Menu.Infrastructure.Data\PetShop.Menu.Infrastructure.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore">
+      <HintPath>..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions">
+      <HintPath>..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.hosting.abstractions\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

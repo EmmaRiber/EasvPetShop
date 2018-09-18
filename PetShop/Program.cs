@@ -1,4 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using EasvPetShopApi;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 using Pet.Menu.Core.ApplicationService;
 using Pet.Menu.Core.ApplicationService.Services;
 using Pet.Menu.Core.DomainService;
@@ -11,21 +16,20 @@ using System.Collections.Generic;
 
 namespace PetShop
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            FakeDB.InitData();
-            
-            var serviceCollection = new ServiceCollection();
-            serviceCollection.AddScoped<IPetRepository, PetRepository>();
-            serviceCollection.AddScoped<IPetService, PetService>();
-            serviceCollection.AddScoped<IPrinter, Printer>();
+            //FakeDB.InitData();
 
-            var serviceProvider = serviceCollection.BuildServiceProvider();
-            var printer = serviceProvider.GetRequiredService<IPrinter>();
-            printer.StartUI();
+            //var serviceCollection = new ServiceCollection();
+            //serviceCollection.AddScoped<IPetRepository, PetRepository>();
+            //serviceCollection.AddScoped<IPetService, PetService>();
+            //serviceCollection.AddScoped<IPrinter, Printer>();
+
+            //var serviceProvider = serviceCollection.BuildServiceProvider();
+            //var printer = serviceProvider.GetRequiredService<IPrinter>();
+            //printer.StartUI();
         }
-
     }
 }

@@ -43,6 +43,15 @@ namespace EasvPetShopApi.Controllers
             {
                 return BadRequest("Name is Required for Creating Pets");
             }
+            if (pet.Price < 0)
+            {
+                return BadRequest("Price is Required for Creating Pets");
+            }
+            if (string.IsNullOrEmpty(pet.Color))
+            {
+                return BadRequest("Color is Required for Creating Pets");
+            }
+
             return _PetService.CreatePets(pet);
         }
 
@@ -54,8 +63,8 @@ namespace EasvPetShopApi.Controllers
             {
                 return BadRequest("Parameter Id and pet Id must be the same");
             }
-            _PetService.UpdatePet(pet);
-            return Ok();
+            
+            return Ok(_PetService.UpdatePet(pet));
         }
 
         // DELETE api/pets/5

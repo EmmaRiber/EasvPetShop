@@ -8,7 +8,7 @@ namespace Pet.Menu.Core.ApplicationService
     public interface IOwnerService
     {
         //New Owner
-        Owner New();
+        Owner New(string first_name, string last_name, string adress, int pets);
 
         //Create Owner
         Owner CreateOwner(Owner owner);

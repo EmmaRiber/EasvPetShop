@@ -10,10 +10,12 @@ namespace Pet.Menu.Core.ApplicationService.Services
     public class PetService : IPetService
     {
         readonly IPetRepository _petRepo;
+        readonly IOwnerRepository _ownerRepo;
 
-        public PetService(IPetRepository petRepository)
+        public PetService(IPetRepository petRepository, IOwnerRepository ownerRepository)
         {
             _petRepo = petRepository;
+            _ownerRepo = ownerRepository;
         }
 
         //Ny pet

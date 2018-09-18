@@ -13,5 +13,7 @@ namespace Pet.Menu.Core.Entity
         public string LastName { get; set; }
 
         public string Adress { get; set; }
+
+        public List<PetEntity> Pets { get; set; }
     }
 }

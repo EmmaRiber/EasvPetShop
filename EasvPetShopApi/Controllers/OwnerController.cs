@@ -42,7 +42,15 @@ namespace EasvPetShopApi.Controllers
         {
             if (string.IsNullOrEmpty(owner.FirstName))
             {
-                return BadRequest("Name is Required for Creating Owner");
+                return BadRequest("First name is Required for Creating Owner");
+            }
+            if (string.IsNullOrEmpty(owner.LastName))
+            {
+                return BadRequest("Last name is Required for Creating Owner");
+            }
+            if (string.IsNullOrEmpty(owner.Adress))
+            {
+                return BadRequest("Adress is Required for Creating Owner");
             }
             return _ownerService.CreateOwner(owner);
         }
@@ -55,8 +63,8 @@ namespace EasvPetShopApi.Controllers
             {
                 return BadRequest("Parameter Id and order Id must be the same");
             }
-            _ownerService.UpdateOwner(owner);
-            return Ok();
+            
+            return Ok(_ownerService.UpdateOwner(owner));
         }
 
         // DELETE: api/ApiWithActions/5

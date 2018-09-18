@@ -3,50 +3,47 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pet.Menu.Infratructure.Data
+namespace PetShop.Menu.Infrastructure.Data
 {
-    public static class FakeDB
+    public class DBInitializer
     {
-        public static int PetId = 1;
-        public static IEnumerable<PetEntity> Pets;
-
-        public static int OwnerId = 1;
-        public static IEnumerable<Owner> Owners;
-
-        public static void InitData()
+        public static void SeedDB(PetAppContext PActx)
         {
-            //FakeDB Pets
-            var pet1 = new PetEntity()
+            PActx.Database.EnsureDeleted();
+            PActx.Database.EnsureCreated();
+
+            var pet1 = PActx.pets.Add(new PetEntity()
             {
-                Id = PetId++,
                 Name = "Findus",
                 Type = "Cat",
                 Color = "Orange/Red",
                 Birthdate = new DateTime(2018, 05, 07),
-                Solddate = new DateTime(2018,08,31),
+                Solddate = new DateTime(2018, 08, 31),
                 PreviousOwner = "Sus find",
                 Price = 2300,
                 Owner = new Owner()
-                { OwnerId = 1}
-            };
+                {
+                    OwnerId = 1
+                }
+            }).Entity;
 
-            var pet2 = new PetEntity()
+            var pet2 = PActx.pets.Add(new PetEntity()
             {
-                Id = PetId++,
                 Name = "Lamse",
                 Type = "Pig",
                 Color = "Brown",
-                Birthdate = new DateTime(2008,12,24),
+                Birthdate = new DateTime(2008, 12, 24),
                 Solddate = new DateTime(2018, 10, 29),
                 PreviousOwner = "Karen Bøvs",
                 Price = 4500,
                 Owner = new Owner()
-                { OwnerId = 1 }
-            };
+                {
+                    OwnerId = 3
+                }
+            }).Entity;
 
-            var pet3 = new PetEntity()
+            var pet3 = PActx.pets.Add(new PetEntity()
             {
-                Id = PetId++,
                 Name = "Blob",
                 Type = "Fish",
                 Color = "Green",
@@ -55,12 +52,13 @@ namespace Pet.Menu.Infratructure.Data
                 PreviousOwner = "Irene Hilde",
                 Price = 180,
                 Owner = new Owner()
-                { OwnerId = 2 }
-            };
+                {
+                    OwnerId = 2
+                }
+            }).Entity;
 
-            var pet4 = new PetEntity()
+            var pet4 = PActx.pets.Add(new PetEntity()
             {
-                Id = PetId++,
                 Name = "Jumbo",
                 Type = "Dog",
                 Color = "Black/White",
@@ -69,12 +67,13 @@ namespace Pet.Menu.Infratructure.Data
                 PreviousOwner = "Sigurt Olsen",
                 Price = 8000,
                 Owner = new Owner()
-                { OwnerId = 1 }
-            };
+                {
+                    OwnerId = 1
+                }
+            }).Entity;
 
-            var pet5 = new PetEntity()
+            var pet5 = PActx.pets.Add(new PetEntity()
             {
-                Id = PetId++,
                 Name = "Sofus",
                 Type = "Cat",
                 Color = "White",
@@ -83,12 +82,13 @@ namespace Pet.Menu.Infratructure.Data
                 PreviousOwner = "Åse Mikkelsen",
                 Price = 1800,
                 Owner = new Owner()
-                { OwnerId = 1 }
-            };
+                {
+                    OwnerId = 3
+                }
+            }).Entity;
 
-            var pet6 = new PetEntity()
+            var pet6 = PActx.pets.Add(new PetEntity()
             {
-                Id = PetId++,
                 Name = "Mickey",
                 Type = "Mouse",
                 Color = "Gray",
@@ -97,37 +97,12 @@ namespace Pet.Menu.Infratructure.Data
                 PreviousOwner = "Stine Damsen",
                 Price = 120,
                 Owner = new Owner()
-                { OwnerId = 3 }
-            };
+                {
+                    OwnerId = 2
+                }
+            }).Entity;
 
-            Pets = new List<PetEntity> { pet1, pet2, pet3, pet4, pet5, pet6 };
-
-            //FakeDB Owners
-            var owner1 = new Owner()
-            {
-                OwnerId = OwnerId++,
-                FirstName = "Sune",
-                LastName = "Strand",
-                Adress = "Roligvej 3"
-            };
-
-            var owner2 = new Owner()
-            {
-                OwnerId = OwnerId++,
-                FirstName = "Ulla",
-                LastName = "Badulla",
-                Adress = "BubbiVej 103"
-            };
-
-            var owner3 = new Owner()
-            {
-                OwnerId = OwnerId++,
-                FirstName = "Finn",
-                LastName = "Pind",
-                Adress = "PølseVej 154"
-            };
-
-            Owners = new List<Owner> { owner1, owner2, owner3 };
+            PActx.SaveChanges();
         }
     }
 }
