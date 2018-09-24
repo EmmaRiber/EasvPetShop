@@ -54,6 +54,12 @@ namespace Pet.Menu.Core.ApplicationService.Services
             return _petRepo.ReadAll().ToList();
         }
 
+        public PetEntity FindPetByIdIncludeOwner(int id)
+        {
+            var pet = _petRepo.ReadByIdIncludeOwner(id);
+            return pet;
+        }
+
         //Updater pet
         public PetEntity UpdatePet(PetEntity petUpdate)
         {
@@ -97,5 +103,7 @@ namespace Pet.Menu.Core.ApplicationService.Services
         {
             return _petRepo.ReadAll().OrderBy(PetEntity => PetEntity.Price).Take(5).ToList();
         }
+
+        
     }
 }

@@ -1,4 +1,5 @@
-﻿using Pet.Menu.Core.DomainService;
+﻿using Microsoft.EntityFrameworkCore;
+using Pet.Menu.Core.DomainService;
 using Pet.Menu.Core.Entity;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,14 @@ namespace PetShop.Menu.Infrastructure.Data.Repositories
 
         public PetEntity Create(PetEntity pet)
         {
-            var PetEntity = _PActx.pets.Add(pet).Entity;
+            if (pet.Owner != null)
+            {
+                pet.Owner = _PActx.Owners.FirstOrDefault
+                    (o => o.OwnerId == pet.Owner.OwnerId);
+            }
+            var p = _PActx.pets.Add(pet).Entity;
             _PActx.SaveChanges();
-            return pet;
+            return p;
         }
 
         public IEnumerable<PetEntity> ReadAll()
@@ -31,8 +37,17 @@ namespace PetShop.Menu.Infrastructure.Data.Repositories
         public PetEntity ReadById(int Id)
         {
             return _PActx.pets
+                .Include(p => p.Owner)
                 .FirstOrDefault(Pet => Pet.Id == Id);
         }
+
+        public PetEntity ReadByIdIncludeOwner(int id)
+        {
+            return _PActx.pets
+                .Include(p => p.Owner)
+                .FirstOrDefault(p => p.Id == id);
+        }
+
 
         public PetEntity Update(PetEntity petUpdate)
         {
@@ -44,7 +59,10 @@ namespace PetShop.Menu.Infrastructure.Data.Repositories
 
         public PetEntity Delete(int Id)
         {
-            throw new NotImplementedException();
+            var petsRemoved = _PActx
+              .Remove(new PetEntity { Id = Id }).Entity;
+            _PActx.SaveChanges();
+            return petsRemoved;
         }
     }
 }

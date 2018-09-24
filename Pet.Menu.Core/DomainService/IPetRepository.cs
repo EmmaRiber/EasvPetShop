@@ -16,6 +16,7 @@ namespace Pet.Menu.Core.DomainService
 
         //Update Data
         PetEntity Update(PetEntity petUpdate);
+        PetEntity ReadByIdIncludeOwner(int id);
 
         //Delete Data 
         PetEntity Delete(int Id);

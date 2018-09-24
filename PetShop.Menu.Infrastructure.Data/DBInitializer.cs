@@ -12,6 +12,31 @@ namespace PetShop.Menu.Infrastructure.Data
             PActx.Database.EnsureDeleted();
             PActx.Database.EnsureCreated();
 
+            //Owners
+            var owner1 = PActx.Owners.Add(new Owner()
+            {
+                FirstName = "Sune",
+                LastName = "Strand",
+                Adress = "Roligvej 3"
+            }).Entity;
+
+            var owner2 = PActx.Owners.Add(new Owner()
+            {
+                FirstName = "Ulla",
+                LastName = "Badulla",
+                Adress = "BubbiVej 103"
+            }).Entity;
+
+            var owner3 = PActx.Owners.Add(new Owner()
+            {
+                FirstName = "Finn",
+                LastName = "Pind",
+                Adress = "PølseVej 154"
+
+            }).Entity;
+
+
+            //Pets
             var pet1 = PActx.pets.Add(new PetEntity()
             {
                 Name = "Findus",
@@ -21,10 +46,7 @@ namespace PetShop.Menu.Infrastructure.Data
                 Solddate = new DateTime(2018, 08, 31),
                 PreviousOwner = "Sus find",
                 Price = 2300,
-                Owner = new Owner()
-                {
-                    OwnerId = 1
-                }
+                Owner = owner2
             }).Entity;
 
             var pet2 = PActx.pets.Add(new PetEntity()
@@ -36,10 +58,7 @@ namespace PetShop.Menu.Infrastructure.Data
                 Solddate = new DateTime(2018, 10, 29),
                 PreviousOwner = "Karen Bøvs",
                 Price = 4500,
-                Owner = new Owner()
-                {
-                    OwnerId = 3
-                }
+                Owner = owner1
             }).Entity;
 
             var pet3 = PActx.pets.Add(new PetEntity()
@@ -51,10 +70,7 @@ namespace PetShop.Menu.Infrastructure.Data
                 Solddate = new DateTime(2018, 12, 23),
                 PreviousOwner = "Irene Hilde",
                 Price = 180,
-                Owner = new Owner()
-                {
-                    OwnerId = 2
-                }
+                Owner = owner3
             }).Entity;
 
             var pet4 = PActx.pets.Add(new PetEntity()
@@ -66,10 +82,7 @@ namespace PetShop.Menu.Infrastructure.Data
                 Solddate = new DateTime(2019, 01, 05),
                 PreviousOwner = "Sigurt Olsen",
                 Price = 8000,
-                Owner = new Owner()
-                {
-                    OwnerId = 1
-                }
+                Owner = owner2
             }).Entity;
 
             var pet5 = PActx.pets.Add(new PetEntity()
@@ -81,10 +94,7 @@ namespace PetShop.Menu.Infrastructure.Data
                 Solddate = new DateTime(2018, 10, 1),
                 PreviousOwner = "Åse Mikkelsen",
                 Price = 1800,
-                Owner = new Owner()
-                {
-                    OwnerId = 3
-                }
+                Owner = owner1
             }).Entity;
 
             var pet6 = PActx.pets.Add(new PetEntity()
@@ -96,11 +106,9 @@ namespace PetShop.Menu.Infrastructure.Data
                 Solddate = new DateTime(2019, 02, 01),
                 PreviousOwner = "Stine Damsen",
                 Price = 120,
-                Owner = new Owner()
-                {
-                    OwnerId = 2
-                }
+                Owner = owner1
             }).Entity;
+
 
             PActx.SaveChanges();
         }

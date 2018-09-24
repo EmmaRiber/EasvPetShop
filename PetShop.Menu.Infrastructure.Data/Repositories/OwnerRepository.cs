@@ -1,4 +1,5 @@
-﻿using Pet.Menu.Core.DomainService;
+﻿using Microsoft.EntityFrameworkCore;
+using Pet.Menu.Core.DomainService;
 using Pet.Menu.Core.Entity;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,9 @@ namespace PetShop.Menu.Infrastructure.Data.Repositories
 
         public Owner ReadById(int id)
         {
-            return _PActx.Owners.FirstOrDefault(o => o.OwnerId == id);
+            return _PActx.Owners
+                .Include(o => o.Pets)
+                .FirstOrDefault(o => o.OwnerId == id);
         }
 
         public Owner Update(Owner OwnerUpdate)
@@ -43,7 +46,10 @@ namespace PetShop.Menu.Infrastructure.Data.Repositories
 
         public Owner Delete(int id)
         {
-            throw new NotImplementedException();
+            var ownersRemoved = _PActx
+                .Remove(new Owner { OwnerId = id }).Entity;
+            _PActx.SaveChanges();
+            return ownersRemoved;
         }
     }
 }

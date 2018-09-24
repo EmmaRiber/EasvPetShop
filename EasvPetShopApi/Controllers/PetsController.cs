@@ -32,7 +32,7 @@ namespace EasvPetShopApi.Controllers
         public ActionResult<PetEntity> Get(int id)
         {
             if (id < 1) return BadRequest("Id must be greater than 0");
-            return _PetService.FindPetById(id);
+            return _PetService.FindPetByIdIncludeOwner(id);
         }
 
         // POST api/pets

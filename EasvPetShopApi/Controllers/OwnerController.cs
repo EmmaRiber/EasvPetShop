@@ -61,7 +61,7 @@ namespace EasvPetShopApi.Controllers
         {
             if (id < 1 || id != owner.OwnerId)
             {
-                return BadRequest("Parameter Id and order Id must be the same");
+                return BadRequest("Id and Owner Id must be the same");
             }
             
             return Ok(_ownerService.UpdateOwner(owner));

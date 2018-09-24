@@ -13,6 +13,7 @@ namespace Pet.Menu.Core.ApplicationService
         PetEntity CreatePets(PetEntity petNew);
         //Read
         PetEntity FindPetById(int id);
+        PetEntity FindPetByIdIncludeOwner(int id);
         List<PetEntity> FindPetByType(string searchValue);
         List<PetEntity> SortByPrice();
         List<PetEntity> GetFiveCheapestPets();
