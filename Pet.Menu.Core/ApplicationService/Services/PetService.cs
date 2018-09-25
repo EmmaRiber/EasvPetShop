@@ -63,16 +63,7 @@ namespace Pet.Menu.Core.ApplicationService.Services
         //Updater pet
         public PetEntity UpdatePet(PetEntity petUpdate)
         {
-            var pet = FindPetById(petUpdate.Id);
-            pet.Name = petUpdate.Name;
-            pet.Type = petUpdate.Type;
-            pet.Color = petUpdate.Color;
-            pet.Birthdate = petUpdate.Birthdate;
-            pet.Solddate = petUpdate.Solddate;
-            pet.PreviousOwner = petUpdate.PreviousOwner;
-            pet.Price = petUpdate.Price;
-
-            return pet;
+            return _petRepo.Update(petUpdate);
         }
 
         //Sletter pet 

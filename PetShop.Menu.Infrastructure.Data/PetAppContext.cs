@@ -11,12 +11,13 @@ namespace PetShop.Menu.Infrastructure.Data
         public PetAppContext(DbContextOptions<PetAppContext> opt)
             : base(opt) { }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<PetEntity>()
-        //        .HasMany(p => pets.Owner)
-        //        .WithOne(o => o.Pets)
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PetEntity>()
+                .HasOne(p => p.Owner)
+                .WithMany(o => o.pets)
+                .OnDelete(DeleteBehavior.SetNull);
+        }
 
         public DbSet<PetEntity> pets { get; set; }
         public DbSet<Owner> Owners { get; set; }

@@ -19,9 +19,9 @@ namespace PetShop.Menu.Infrastructure.Data.Repositories
 
         public Owner Create(Owner owner)
         {
-            var o = _PActx.Owners.Add(owner).Entity;
+            _PActx.Attach(owner).State = EntityState.Added;
             _PActx.SaveChanges();
-            return o;
+            return owner;
         }
 
         public IEnumerable<Owner> ReadAll()
@@ -32,16 +32,16 @@ namespace PetShop.Menu.Infrastructure.Data.Repositories
         public Owner ReadById(int id)
         {
             return _PActx.Owners
-                .Include(o => o.Pets)
+                .Include(o => o.pets)
                 .FirstOrDefault(o => o.OwnerId == id);
         }
 
         public Owner Update(Owner OwnerUpdate)
         {
-            var oUpdate = _PActx.Update(OwnerUpdate).Entity;
-            var change = _PActx.ChangeTracker.Entries();
+            _PActx.Attach(OwnerUpdate).State = EntityState.Modified;
+            _PActx.Entry(OwnerUpdate).Reference(o => o.pets).IsModified = true;
             _PActx.SaveChanges();
-            return oUpdate;
+            return OwnerUpdate;
         }
 
         public Owner Delete(int id)

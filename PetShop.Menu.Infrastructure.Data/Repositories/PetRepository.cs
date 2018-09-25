@@ -19,14 +19,9 @@ namespace PetShop.Menu.Infrastructure.Data.Repositories
 
         public PetEntity Create(PetEntity pet)
         {
-            if (pet.Owner != null)
-            {
-                pet.Owner = _PActx.Owners.FirstOrDefault
-                    (o => o.OwnerId == pet.Owner.OwnerId);
-            }
-            var p = _PActx.pets.Add(pet).Entity;
+            var pets = _PActx.pets.Add(pet).Entity;
             _PActx.SaveChanges();
-            return p;
+            return pets;
         }
 
         public IEnumerable<PetEntity> ReadAll()
@@ -37,7 +32,6 @@ namespace PetShop.Menu.Infrastructure.Data.Repositories
         public PetEntity ReadById(int Id)
         {
             return _PActx.pets
-                .Include(p => p.Owner)
                 .FirstOrDefault(Pet => Pet.Id == Id);
         }
 
@@ -51,10 +45,11 @@ namespace PetShop.Menu.Infrastructure.Data.Repositories
 
         public PetEntity Update(PetEntity petUpdate)
         {
-            var pUpdate = _PActx.Update(petUpdate).Entity;
-            var change = _PActx.ChangeTracker.Entries();
+            _PActx.Attach(petUpdate).State = EntityState.Modified;
+            _PActx.Entry(petUpdate).Reference(p => p.Owner).IsModified = true;
             _PActx.SaveChanges();
-            return pUpdate;
+            return petUpdate;
+            
         }
 
         public PetEntity Delete(int Id)
