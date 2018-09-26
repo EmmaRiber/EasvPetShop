@@ -49,12 +49,12 @@ namespace EasvPetShopApi
             //    opt => opt.UseInMemoryDatabase("ThaDB")
             //    );
 
-            if(_env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 services.AddDbContext<PetAppContext>(
                     opt => opt.UseSqlite("Data Source=PetAppContext.db"));
             }
-            else if(_env.IsProduction())
+            else if (_env.IsProduction())
             {
                 services.AddDbContext<PetAppContext>(
                     opt => opt
