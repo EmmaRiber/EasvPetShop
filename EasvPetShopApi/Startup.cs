@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Pet.Menu.Core.ApplicationService;
 using Pet.Menu.Core.ApplicationService.Services;
 using Pet.Menu.Core.DomainService;
-using PetShop;
 using PetShop.Menu.Infrastructure.Data;
 using PetShop.Menu.Infrastructure.Data.Repositories;
 
@@ -52,7 +45,7 @@ namespace EasvPetShopApi
             if (_env.IsDevelopment())
             {
                 services.AddDbContext<PetAppContext>(
-                    opt => opt.UseSqlite("Data Source=PetAppContext.db"));
+                    opt => opt.UseSqlite("Data Source=PetApp.db"));
             }
             else if (_env.IsProduction())
             {
@@ -63,7 +56,6 @@ namespace EasvPetShopApi
             
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IPetService, PetService>();
-            //services.AddScoped<IPrinter, Printer>();
 
             services.AddScoped<IOwnerRepository, OwnerRepository>();
             services.AddScoped<IOwnerService, OwnerService>();
