@@ -22,12 +22,25 @@ namespace EasvPetShopApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        //public Startup(IConfiguration configuration)
+        //{
+        //    Configuration = configuration;
+        //}
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration _conf { get; }
+
+        private IHostingEnvironment _env { get; set; }
+
+        public Startup(IHostingEnvironment env)
+        {
+            _env = env;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            _conf = builder.Build();
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -36,9 +49,18 @@ namespace EasvPetShopApi
             //    opt => opt.UseInMemoryDatabase("ThaDB")
             //    );
 
-            services.AddDbContext<PetAppContext>(
-                opt => opt.UseSqlite("Data Source=PetAppContext.db"));
-
+            if(_env.IsDevelopment())
+            {
+                services.AddDbContext<PetAppContext>(
+                    opt => opt.UseSqlite("Data Source=PetAppContext.db"));
+            }
+            else if(_env.IsProduction())
+            {
+                services.AddDbContext<PetAppContext>(
+                    opt => opt
+                    .UseSqlServer(_conf.GetConnectionString("DefaultConnection")));
+            }
+            
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IPetService, PetService>();
             //services.AddScoped<IPrinter, Printer>();
@@ -68,9 +90,14 @@ namespace EasvPetShopApi
             }
             else
             {
-                app.UseHsts();
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var PActx = scope.ServiceProvider.GetService<PetAppContext>();
+                    PActx.Database.EnsureCreated();
+                }
+                    app.UseHsts();
             }
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
