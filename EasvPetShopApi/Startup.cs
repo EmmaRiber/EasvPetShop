@@ -38,6 +38,8 @@ namespace EasvPetShopApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             //services.AddDbContext<PetAppContext>(
             //    opt => opt.UseInMemoryDatabase("ThaDB")
             //    );
@@ -51,7 +53,7 @@ namespace EasvPetShopApi
             {
                 services.AddDbContext<PetAppContext>(
                     opt => opt
-                    .UseSqlServer(_conf.GetConnectionString("DefaultConnection")));
+                    .UseSqlServer(_conf.GetConnectionString("defaultConnection")));
             }
             
             services.AddScoped<IPetRepository, PetRepository>();
@@ -89,6 +91,8 @@ namespace EasvPetShopApi
                 }
                     app.UseHsts();
             }
+
+            app.UseCors(builer => builer.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             //app.UseHttpsRedirection();
             app.UseMvc();
         }

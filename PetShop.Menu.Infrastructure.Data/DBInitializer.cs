@@ -109,6 +109,10 @@ namespace PetShop.Menu.Infrastructure.Data
                 Owner = owner1
             }).Entity;
 
+            var user1 = PActx.Users.Add(new User()
+            {
+
+            }).Entity;
 
             PActx.SaveChanges();
         }
