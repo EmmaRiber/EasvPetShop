@@ -16,7 +16,7 @@ namespace PetShop.Menu.Infrastructure.Data
             modelBuilder.Entity<PetEntity>()
                 .HasOne(p => p.Owner)
                 .WithMany(o => o.pets)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.SetNull); 
         }
 
         public DbSet<PetEntity> pets { get; set; }
