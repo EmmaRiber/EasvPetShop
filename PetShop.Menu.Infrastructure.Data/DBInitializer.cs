@@ -11,8 +11,8 @@ namespace PetShop.Menu.Infrastructure.Data
         {
             PActx.Database.EnsureDeleted();
             PActx.Database.EnsureCreated();
-            
 
+            //Lavet to users Admin og User
             // Create two users with hashed and salted passwords
             string password = "1234";
             byte[] passwordHashJoe, passwordSaltJoe, passwordHashAnn, passwordSaltAnn;

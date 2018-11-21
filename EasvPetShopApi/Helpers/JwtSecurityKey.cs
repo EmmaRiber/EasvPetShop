@@ -3,6 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+// Helper class . Token controlleren behøver en security key, 
+//for at lave en token, og den laves derinde. 
+//Enten kommer der en string, og ellers kan man sætte den til en new value.
+//Den bliver også brugt i Starup classen.
+
 namespace PetShop.Menu.Infrastructure.Data
 {
     public static class JwtSecurityKey

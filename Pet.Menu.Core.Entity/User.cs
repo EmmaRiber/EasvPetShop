@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
+//User information – Username passwords osv.
 namespace Pet.Menu.Core.Entity
 {
     public class User

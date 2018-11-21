@@ -23,6 +23,10 @@ namespace EasvPetShopApi.Controllers
             repository = repos;
         }
 
+        //Søger for login. Hvis username og password 
+        //passer sammen, så laver den en token, og retuner den til clienten. 
+        //Login metoden har en entity som parameter, som er LoginInputModel, 
+        //hvor der er Username og password i.
         [HttpPost]
         public IActionResult Login([FromBody]LoginInputModel model)
         {
