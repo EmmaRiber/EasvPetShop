@@ -14,6 +14,10 @@ namespace PetShop.Menu.Infrastructure.Data
 
             //Lavet to users Admin og User
             // Create two users with hashed and salted passwords
+            // Salt er tilfældig data, som genereres for hvert kodeord
+            //Så her i vores, hvor AdminAnn og UserJoe har det samme password, så vil det
+            //endelige "password" inklusiv salt ikke blive den samme hash.
+            //Da salt er unikt fra password til password.
             string password = "1234";
             byte[] passwordHashJoe, passwordSaltJoe, passwordHashAnn, passwordSaltAnn;
             CreatePasswordHash(password, out passwordHashJoe, out passwordSaltJoe);
