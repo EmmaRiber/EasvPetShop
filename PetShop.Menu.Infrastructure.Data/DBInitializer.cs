@@ -9,7 +9,7 @@ namespace PetShop.Menu.Infrastructure.Data
     {
         public static void SeedDB(PetAppContext PActx)
         {
-            PActx.Database.EnsureDeleted();
+            //PActx.Database.EnsureDeleted();
             PActx.Database.EnsureCreated();
 
             //Lavet to users Admin og User

@@ -63,7 +63,7 @@ namespace EasvPetShopApi
             {
                 services.AddDbContext<PetAppContext>(
                     opt => opt
-                        .UseSqlServer(_conf.GetConnectionString("DefaultConnection")));
+                        .UseSqlServer(_conf.GetConnectionString("defaultConnection")));
             }
 
             //services.AddDbContext<PetStoreAppContext>(opt => opt.UseSqlite("Data Source=petstoreApp"));
@@ -94,6 +94,7 @@ namespace EasvPetShopApi
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
                     var ctx = scope.ServiceProvider.GetService<PetAppContext>();
+                    ctx.Database.EnsureDeleted();
                     DBInitializer.SeedDB(ctx);
                 }
             }
@@ -102,7 +103,7 @@ namespace EasvPetShopApi
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
                     var ctx = scope.ServiceProvider.GetService<PetAppContext>();
-                    ctx.Database.EnsureCreated();
+                    DBInitializer.SeedDB(ctx);
                 }
                 app.UseHsts();
             }
